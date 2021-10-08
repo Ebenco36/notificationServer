@@ -20,9 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/set-end-point/{topic}', NotificationController::class.'@setEndPoint')->name('setEndPoint');
+Route::post('/subscribe/{topic}', NotificationController::class.'@setEndPoint')->name('setEndPoint');
 
-Route::post('/test-webhook/{topic}', NotificationController::class.'@PublishToWebhook')->name('testWebhook');
+Route::post('/publish/{topic}', NotificationController::class.'@PublishToWebhook')->name('testWebhook');
 
 
 
