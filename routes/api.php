@@ -21,7 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/subscribe/{topic}', NotificationController::class.'@setEndPoint')->name('setEndPoint');
-
 Route::post('/publish/{topic}', NotificationController::class.'@PublishToWebhook')->name('testWebhook');
 
 
