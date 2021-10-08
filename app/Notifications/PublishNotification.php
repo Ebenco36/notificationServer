@@ -19,9 +19,11 @@ class PublishNotification extends Notification implements ShouldQueue
      * @return void
      */
     protected $data;
-    public function __construct($data)
+    protected $topic;
+    public function __construct($data, $topic)
     {
         $this->data = $data;
+        $this->topic = $topic;
     }
 
     /**
@@ -46,7 +48,8 @@ class PublishNotification extends Notification implements ShouldQueue
         // dd($notifiable);
         return WebhookMessage::create()
             ->data([
-               'data' => $this->data
+                'topic' => $this->topic,
+                'data'  => $this->data
             ])
             ->userAgent("Custom-User-Agent")
             ->header('X-Custom', 'Custom-Header');

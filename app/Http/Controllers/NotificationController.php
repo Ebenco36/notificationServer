@@ -49,9 +49,9 @@ class NotificationController extends Controller
             $request->request->add(['topic'=> $topic]);
         }
         $subscribers = $this->webhook->getSubscribers($topic);
-        Notification::send($subscribers, (new PublishNotification($request->data))
+        Notification::send($subscribers, (new PublishNotification($request->data, $request->topic))
             ->onConnection('database')
-            ->onQueue('high')
+            ->onQueue('default')
             ->delay(1)
         );
 

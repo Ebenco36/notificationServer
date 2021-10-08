@@ -36,15 +36,15 @@ class WebhookChannel
     public function send($notifiable, Notification $notification)
     {   
         try{
+           
             if (! $url = $notifiable->routeNotificationFor('webhook')) {
                 return;
             }
 
             $webhookData = $notification->toWebhook($notifiable)->toArray();
             $response   = $this->client->post($url, [
-                'topic'     => Arr::get($webhookData, $notifiable->topic),
-                'data'      => json_encode(Arr::get($webhookData, 'data')),
-                'headers'   => Arr::get($webhookData, 'headers'),
+                'headers' => ['Content-Type' => 'application/json'],
+                'body'      => json_encode(Arr::get($webhookData, 'data'))
             ]);
             if ($response->getStatusCode() >= 300 || $response->getStatusCode() < 200) {
                 throw SendNotificationException::serviceRespondedWithAnError($response);
