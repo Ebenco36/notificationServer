@@ -30,6 +30,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /**
+         * Solid principle (Dependency Inversion Principle)
+         */
         $this->app->bind(WebhookRepositoryInterface::class, WebhookRepository::class);
         $this->app->bind(LogRepositoryInterface::class, LogRepository::class);
     }

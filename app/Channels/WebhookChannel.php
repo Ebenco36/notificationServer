@@ -40,7 +40,6 @@ class WebhookChannel
             if (! $url = $notifiable->routeNotificationFor('webhook')) {
                 return;
             }
-
             $webhookData = $notification->toWebhook($notifiable)->toArray();
             $response   = $this->client->post($url, [
                 'headers' => ['Content-Type' => 'application/json'],
@@ -53,6 +52,10 @@ class WebhookChannel
         
         }
         catch(\GuzzleHttp\Exception\ClientException $e){
+            /**
+             * Rather than throw exceptions, we store the status code
+             * into our database
+             */
             $resp = [
                 'webhook_id' => $notifiable->id,
                 'status_code'=> $e->getResponse()->getStatusCode()
@@ -61,6 +64,10 @@ class WebhookChannel
             // throw SendNotificationException::serviceRespondedWithAnError($e->getResponse());
         }
         catch(Exception $e){
+            /**
+             * Rather than throw exceptions, we store the status code
+             * into our database
+             */
             $resp = [
                 'webhook_id' => $notifiable->id,
                 'status_code'=> $e->getResponse()->getStatusCode()

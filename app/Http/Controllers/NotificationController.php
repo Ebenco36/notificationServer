@@ -8,6 +8,7 @@ use App\Http\Requests\PublishRequest;
 use App\Models\Webhook;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PublishNotification;
+// Dependency Inversion Principle
 use App\Repositories\Interfaces\WebhookRepositoryInterface;
 class NotificationController extends Controller
 {
@@ -42,7 +43,7 @@ class NotificationController extends Controller
      */
     public function PublishToWebhook(PublishRequest $request, $topic)
     {
-        // Notify all user with the same topic
+        // Notify all subscribers with the same topic
         if($request->isJson()){
             $request->json()->add(['topic'=> $topic]);
         }else{
@@ -54,8 +55,17 @@ class NotificationController extends Controller
             ->onQueue('default')
             ->delay(1)
         );
-
-        return 'done';
+        /**
+         * Error Logs are store in the database
+         * For more information check the error log
+         * Error table has 2 attributes
+         * webhook_id, Status_code
+         * 
+         */
+        return response()->json([
+            "status"    => "success", 
+            "message"   => "Notification Sent..."
+        ]);
 
     }
 }
