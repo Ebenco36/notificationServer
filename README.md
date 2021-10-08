@@ -24,14 +24,14 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## How to Use
 
-Create your database
-Set the .env config
-Run php artisan migrate
-Run php artisan serve --port=8000
+<p>Create your database</p>
+<p>Set the .env config</p>
+<p>Run php artisan migrate</p>
+<p>Run php artisan serve --port=8000</p>
 
-This is the Webhook Server
-Endpoints
-
+<p>This is the Webhook Server</p>
+<p>Endpoints</p>
+```
 http://127.0.0.1:8000/publish/topic
 
 {
@@ -39,13 +39,15 @@ http://127.0.0.1:8000/publish/topic
         "message": "You are welcome to my world"
     }
 }
+```
 
-
+```
 http://127.0.0.1:8000/subscribe/topic
 {
     "url": "http://127.0.0.1:5000/test2"
 }
 
+```
 
 ## Learning Laravel
 
