@@ -21,6 +21,32 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+
+## How to Use
+
+Create your database
+Set the .env config
+Run php artisan migrate
+Run php artisan serve --port=8000
+
+This is the Webhook Server
+Endpoints
+
+http://127.0.0.1:8000/publish/topic
+
+{
+    "data": {
+        "message": "You are welcome to my world"
+    }
+}
+
+
+http://127.0.0.1:8000/subscribe/topic
+{
+    "url": "http://127.0.0.1:5000/test2"
+}
+
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
